@@ -23,39 +23,15 @@
         <Authors>SamuelIH</Authors>
 
         <Description>Flexible, cascadable, overridable blueprints for NwnEE</Description>
+
+        <PackageProjectUrl>https://github.com/Samuel-IH/SamuelIH.Nwn.Blueprints</PackageProjectUrl>
+
+        <PackageLicenseUrl>https://raw.githubusercontent.com/Samuel-IH/SamuelIH.Nwn.Blueprints/main/LICENSE</PackageLicenseUrl>
+
+        <RepositoryUrl>https://github.com/Samuel-IH/SamuelIH.Nwn.Blueprints</RepositoryUrl>
+
+        <RepositoryType>git</RepositoryType>
     </PropertyGroup>
-
-    <!--Uncomment and fill to build a NuGet package for your plugin.-->
-    <!--
-      <PropertyGroup>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    
-        <PackageId>$(AssemblyName)</PackageId>
-        <Authors></Authors>
-    
-        <RepositoryUrl></RepositoryUrl>
-        <RepositoryType></RepositoryType>
-    
-        <Description>
-          A NWN Anvil plugin: https://github.com/nwn-dotnet/Anvil
-        </Description>
-    
-        <PackageTags>Neverwinter Nights;NWN;</PackageTags>
-        <PackageLicenseExpression>MIT</PackageLicenseExpression>
-      </PropertyGroup>
-    -->
-
-    <!--Uncomment to include debug symbols, source code and documentation with your nuget package/plugin.-->
-    <!--
-      <PropertyGroup>
-        <GenerateDocumentationFile>true</GenerateDocumentationFile>
-        <EmbedUntrackedSources>true</EmbedUntrackedSources>
-        <PublishRepositoryUrl>true</PublishRepositoryUrl>
-        <IncludeSymbols>true</IncludeSymbols>
-        <DebugSymbols>true</DebugSymbols>
-        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-      </PropertyGroup>
-    -->
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
         <OutputPath>bin\Debug\$(AssemblyName)</OutputPath>
