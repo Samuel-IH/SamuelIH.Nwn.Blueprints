@@ -26,11 +26,13 @@
 
         <PackageProjectUrl>https://github.com/Samuel-IH/SamuelIH.Nwn.Blueprints</PackageProjectUrl>
 
-        <PackageLicenseUrl>https://raw.githubusercontent.com/Samuel-IH/SamuelIH.Nwn.Blueprints/main/LICENSE</PackageLicenseUrl>
-
         <RepositoryUrl>https://github.com/Samuel-IH/SamuelIH.Nwn.Blueprints</RepositoryUrl>
 
         <RepositoryType>git</RepositoryType>
+
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -47,6 +49,7 @@
 
     <ItemGroup>
       <PackageReference Include="YamlDotNet" Version="15.1.4" />
+      <None Include="../README.md" Pack="true" PackagePath="\"/>
     </ItemGroup>
 
 </Project>
