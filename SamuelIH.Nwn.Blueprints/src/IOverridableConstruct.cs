@@ -1,7 +1,8 @@
-﻿namespace SamuelIH.Nwn.Blueprints;
-
-public interface IOverridableConstruct
+﻿namespace SamuelIH.Nwn.Blueprints
 {
-    void ResolveFromParent(object? parent);
-    bool IsResolved { get; }
+    public interface IOverridableConstruct
+    {
+        void ResolveFromParent(object? parent);
+        bool IsResolved { get; }
+    }
 }

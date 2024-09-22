@@ -8,7 +8,8 @@ namespace SamuelIH.Nwn.Blueprints
 {
     public abstract class Blueprint
     {
-        private static readonly Dictionary<Type, CachedReflectionData> cachedReflectionData = new();
+        private static readonly Dictionary<Type, CachedReflectionData> cachedReflectionData =
+            new Dictionary<Type, CachedReflectionData>();
 
         internal string name = "";
         internal string baseName = "";
@@ -51,7 +52,7 @@ namespace SamuelIH.Nwn.Blueprints
         internal (Blueprint parent, object value)? ResolveParent(PropertyInfo prop)
         {
             var parent = Parent;
-            while (parent is not null)
+            while (parent is { })
             {
                 if (prop.GetValue(parent) is object value)
                 {
@@ -68,14 +69,18 @@ namespace SamuelIH.Nwn.Blueprints
         
         internal void ResolveOverridableConstructIfNeeded(PropertyInfo prop)
         {
-            if (prop.GetValue(this) is not IOverridableConstruct construct) return;
+            var construct = prop.GetValue(this) as IOverridableConstruct;
+            if (construct == null) return;
             if (construct.IsResolved) return;
 
-            if (ResolveParent(prop) is not (Blueprint parent, object parentValue))
+            var parentData = ResolveParent(prop);
+            if (parentData is null)
             {
                 construct.ResolveFromParent(null);
                 return;
             }
+            var parent = parentData.Value.parent;
+            var parentValue = parentData.Value.value;
             
             parent.ResolveOverridableConstructIfNeeded(prop);
             construct.ResolveFromParent(parentValue);
@@ -92,25 +97,27 @@ namespace SamuelIH.Nwn.Blueprints
 
             foreach (var prop in refData.NonOptionalProps)
             {
-                if (prop.GetValue(this) is not null)
+                if (prop.GetValue(this) is { })
                 {
                     ResolveOverridableConstructIfNeeded(prop);
                     continue;
                 }
 
-                if (ResolveProperty(prop) is not object value) return false;
+                var value = ResolveProperty(prop) as object;
+                if (value == null) return false;
                 prop.SetValue(this, value);
             }
 
             foreach (var prop in refData.OptionalProps)
             {
-                if (prop.GetValue(this) is not null)
+                if (prop.GetValue(this) is { })
                 {
                     ResolveOverridableConstructIfNeeded(prop);
                     continue;
                 }
-                
-                if (ResolveProperty(prop) is not object value) continue;
+
+                var value = ResolveProperty(prop) as object;
+                if (value == null) continue;
                 prop.SetValue(this, value);
             }
 

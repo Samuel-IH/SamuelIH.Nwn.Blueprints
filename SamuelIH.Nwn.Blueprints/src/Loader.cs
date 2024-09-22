@@ -5,11 +5,11 @@ using System.Linq;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
-namespace SamuelIH.Nwn.Blueprints;
-
+namespace SamuelIH.Nwn.Blueprints
+{
     public class Loader
     {
-        public LoggingBridge Log { get; set; } = new();
+        public LoggingBridge Log { get; set; } = new LoggingBridge();
 
         private readonly IDeserializer _deserializer = new DeserializerBuilder()
             .WithNamingConvention(CamelCaseNamingConvention.Instance)
@@ -20,10 +20,10 @@ namespace SamuelIH.Nwn.Blueprints;
             .WithNamingConvention(CamelCaseNamingConvention.Instance)
             .ConfigureDefaultValuesHandling(DefaultValuesHandling.OmitNull)
             .Build();
-        
-        private readonly Dictionary<string, ItemBlueprint> _itemBlueprints = new();
-        private readonly Dictionary<string, ItemBlueprint> _rawItemBlueprints = new();
-        private readonly Dictionary<string, ProviderData> _providers = new();
+
+        private readonly Dictionary<string, ItemBlueprint> _itemBlueprints = new Dictionary<string, ItemBlueprint>();
+        private readonly Dictionary<string, ItemBlueprint> _rawItemBlueprints = new Dictionary<string, ItemBlueprint>();
+        private readonly Dictionary<string, ProviderData> _providers = new Dictionary<string, ProviderData>();
 
 
         private void AssertProviderNamespaceValid(string ns)
@@ -211,8 +211,10 @@ namespace SamuelIH.Nwn.Blueprints;
 
         private class ProviderData
         {
-            public readonly Dictionary<string, ItemBlueprint> rawItemBlueprints = new();
-            public readonly Dictionary<string, ItemBlueprint> itemBlueprints = new();
+            public readonly Dictionary<string, ItemBlueprint> rawItemBlueprints =
+                new Dictionary<string, ItemBlueprint>();
+
+            public readonly Dictionary<string, ItemBlueprint> itemBlueprints = new Dictionary<string, ItemBlueprint>();
             public IBlueprintProvider provider = null!;
         }
 
@@ -224,3 +226,4 @@ namespace SamuelIH.Nwn.Blueprints;
             }
         }
     }
+}

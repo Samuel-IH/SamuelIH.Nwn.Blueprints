@@ -113,9 +113,6 @@ namespace SamuelIH.Nwn.Blueprints
         [Inherited]
         public OverridableDictionary<string>? StrVars { get; set; }
         
-        [Inherited]
-        public OverridableDictionary<int>? IntMetadata { get; set; }
-        
         
         public ItemBlueprint Clone() => MemberwiseClone() as ItemBlueprint ?? throw new Exception("Failed to clone ItemBlueprint");
     }
